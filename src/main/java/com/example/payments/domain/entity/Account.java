@@ -1,0 +1,18 @@
+package com.example.payments.domain.entity;
+
+import com.example.payments.domain.enums.AccountStatusEnum;
+import com.example.payments.domain.enums.PaymentMethod;
+import com.example.payments.domain.enums.PaymentStatusEnum;
+
+import java.math.BigDecimal;
+
+public interface Account {
+
+    Long getId();
+    String getName();
+    BigDecimal getInitialBalance();
+    PaymentMethod getPaymentMethod();
+    Boolean getAuthorized();
+    AccountStatusEnum getAccountStatus();
+
+}

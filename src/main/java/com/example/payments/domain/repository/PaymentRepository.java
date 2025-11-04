@@ -1,0 +1,11 @@
+package com.example.payments.domain.repository;
+
+import com.example.payments.domain.entity.Payment;
+
+import java.util.Optional;
+
+public interface PaymentRepository {
+
+    Optional<Payment> save(Payment payment);
+    Optional<Payment> findByRequestId(String requestId);
+}
