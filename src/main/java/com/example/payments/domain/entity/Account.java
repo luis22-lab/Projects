@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 public interface Account {
 
     Long getId();
+    Long getIdAccount();
     String getName();
     BigDecimal getInitialBalance();
     PaymentMethod getPaymentMethod();

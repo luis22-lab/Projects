@@ -8,11 +8,12 @@ import java.time.LocalDateTime;
 
 public interface PaymentRequestDetail {
 
-        Long getId();
+        Long getIdempotencyKey();
         String getOrigin();
-        String getDestination();
-        BigDecimal getAmount();
+        String getDestinationId();
         PaymentMethod getPaymentMethod();
+        LocalDateTime getCreateDate();
+        LocalDateTime getDateValue();
+        BigDecimal getAmount();
         PaymentStatusEnum getStatus();
-        LocalDateTime getValueDate();
 }

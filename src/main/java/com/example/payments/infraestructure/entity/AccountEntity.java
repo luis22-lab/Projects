@@ -1,12 +1,12 @@
 package com.example.payments.infraestructure.entity;
 
+import com.example.payments.domain.enums.AccountStatusEnum;
 import com.example.payments.domain.enums.PaymentMethod;
 import com.example.payments.domain.enums.PaymentStatusEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Entity(name = "account")
 @Data
@@ -17,6 +17,9 @@ public class AccountEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable= false)
     private Long id;
+
+    @Column(name = "idAccount",nullable = false, updatable = false)
+    private Long idAccount;
 
     @Column(name = "name",nullable = false, updatable = false)
     private String name;
@@ -30,8 +33,8 @@ public class AccountEntity {
     @Column(name = "authorized",nullable = false, updatable = false)
     private boolean authorized;
 
-    @Column(name = "status",nullable = false, updatable = false)
-    PaymentStatusEnum status;
+    @Column(name = "accountStatus",nullable = false, updatable = false)
+    AccountStatusEnum accountStatus;
 
 
 

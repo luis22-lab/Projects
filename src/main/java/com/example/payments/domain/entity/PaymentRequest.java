@@ -8,7 +8,7 @@ import java.util.List;
 public interface PaymentRequest {
 
     Long getId();
-    String getRequestId();
+    String getIdempotencyKey();
     List<PaymentRequestDetail> getPaymentRequestDetails();
     LocalDateTime getRequestDate();
     PaymentStatusEnum getStatus();

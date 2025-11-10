@@ -1,4 +1,4 @@
-package com.example.payments.api.Dto;
+package com.example.payments.api.dto;
 
 import com.example.payments.domain.entity.PaymentRequest;
 import com.example.payments.domain.entity.PaymentRequestDetail;
@@ -7,18 +7,18 @@ import com.example.payments.domain.enums.PaymentStatusEnum;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record PaymentRequestDto (Long id,String requestId,List <PaymentRequestDetail> paymentRequestDetails,LocalDateTime requestDate,PaymentStatusEnum status)implements PaymentRequest{
+public record PaymentRequestDto (Long id,String idempotencyKey,List <PaymentRequestDetail> paymentRequestDetails,LocalDateTime requestDate,PaymentStatusEnum status)implements PaymentRequest{
 
-    public PaymentRequestDto(Long id, String requestId, List<PaymentRequestDetail> paymentRequestDetails, LocalDateTime requestDate, PaymentStatusEnum status) {
+    public PaymentRequestDto(Long id, String idempotencyKey, List<PaymentRequestDetail> paymentRequestDetails, LocalDateTime requestDate, PaymentStatusEnum status) {
         this.id = id;
-        this.requestId = requestId;
+        this.idempotencyKey = idempotencyKey;
         this.paymentRequestDetails = paymentRequestDetails;
         this.requestDate = requestDate;
         this.status = status;
     }
 
     public PaymentRequestDto(PaymentRequest  paymentRequest) {
-        this(paymentRequest.getId(),paymentRequest.getRequestId(),paymentRequest.getPaymentRequestDetails(),paymentRequest.getRequestDate(),paymentRequest.getStatus());
+        this(paymentRequest.getId(),paymentRequest.getIdempotencyKey(),paymentRequest.getPaymentRequestDetails(),paymentRequest.getRequestDate(),paymentRequest.getStatus());
     }
 
     @Override
@@ -27,8 +27,8 @@ public record PaymentRequestDto (Long id,String requestId,List <PaymentRequestDe
     }
 
     @Override
-    public String getRequestId() {
-        return requestId;
+    public String getIdempotencyKey() {
+        return idempotencyKey;
     }
 
     @Override

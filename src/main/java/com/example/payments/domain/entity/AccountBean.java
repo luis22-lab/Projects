@@ -12,13 +12,15 @@ import java.math.BigDecimal;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 
-public class AccountBean implements Account{
+public class AccountBean implements Account {
 
     private final Long id;
-    private BigDecimal initialBalance;
+    private final Long idAccount;
+    private final BigDecimal initialBalance;
     private final String name;
     private final PaymentMethod paymentMethod;
     private final Boolean authorized;
-    private final AccountStatusEnum AccountStatus;
+    private final AccountStatusEnum accountStatus;
+
 
 }

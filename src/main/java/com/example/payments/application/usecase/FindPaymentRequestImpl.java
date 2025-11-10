@@ -1,4 +1,4 @@
-package com.example.payments.application.payment;
+package com.example.payments.application.usecase;
 
 import com.example.payments.domain.entity.PaymentRequest;
 import com.example.payments.domain.usecase.FindPaymentRequestUseCase;

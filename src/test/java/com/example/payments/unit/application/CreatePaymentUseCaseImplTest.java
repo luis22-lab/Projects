@@ -1,8 +1,11 @@
-package com.example.payments.application.payment;
+package com.example.payments.unit.application;
 
+import com.example.payments.application.usecase.CreatePaymentUseCaseImpl;
 import com.example.payments.domain.entity.Payment;
+import com.example.payments.domain.entity.PaymentBean;
 import com.example.payments.domain.repository.PaymentRepository;
 import org.jeasy.random.EasyRandom;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -18,24 +21,21 @@ import static org.mockito.Mockito.when;
 
 public class CreatePaymentUseCaseImplTest {
 
-    private final EasyRandom easyRandom = new EasyRandom();
+    /*private final EasyRandom easyRandom = new EasyRandom();
     @InjectMocks
-    private  CreatePaymentUseCaseImpl createPaymentUseCaseImpl;
+    private CreatePaymentUseCaseImpl createPaymentUseCaseImpl;
     @Mock
     private PaymentRepository repository;
 
+    @Test
     public void  testCreatePaymentUseCase(){
+        Payment request = easyRandom.nextObject(PaymentBean.class);
 
-            Payment request = easyRandom.nextObject(Payment.class);
-            Optional<Payment> expected = repository.save(request);
+        when(repository.save(request)).thenReturn(Optional.of(request));
 
-            when(createPaymentUseCaseImpl.apply(request)).thenReturn(request);
-            when(repository.save(request)).thenReturn(expected);
+        Payment actual = createPaymentUseCaseImpl.apply(request);
 
-            final var actual = createPaymentUseCaseImpl.apply(request);
-
-            verify(repository).save(request);
-
-            assertEquals(request,actual);
-    }
+        verify(repository).save(request);
+        assertEquals(request, actual);
+    }*/
 }

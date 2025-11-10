@@ -13,14 +13,15 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 
-public class PaymentRequestDetailBean implements PaymentRequestDetail{
+public class PaymentRequestDetailBean implements PaymentRequestDetail {
 
-    private final Long id;
+    private final Long idempotencyKey;
+    private final String requestId;
     private final String origin;
-    private final String destination;
-    private final BigDecimal amount;
+    private final String destinationId;
     private final PaymentMethod paymentMethod;
+    private final LocalDateTime createDate;
+    private final LocalDateTime dateValue;
+    private final BigDecimal amount;
     private final PaymentStatusEnum status;
-    private final LocalDateTime valueDate;
-
 }

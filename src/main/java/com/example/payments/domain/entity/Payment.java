@@ -11,12 +11,12 @@ public interface Payment {
 
     Long getId();
     String getRequestId();
-    String getOrigin();
+    Long getOrigin();
     Long getDestinationId();
     PaymentMethod getPaymentMethod();
     LocalDateTime getCreateDate();
     LocalDateTime getDateValue();
     BigDecimal getAmount();
-    PaymentStatusEnum getPaymentStatusEnum();
+    PaymentStatusEnum getStatus();
 
 }

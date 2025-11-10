@@ -1,8 +1,9 @@
 package com.example.payments.api;
 
 
-import com.example.payments.api.Dto.PaymentDto;
-import com.example.payments.domain.mapper.PaymentMapper;
+import ch.qos.logback.core.net.SyslogOutputStream;
+import com.example.payments.api.dto.PaymentDto;
+import com.example.payments.application.mapper.PaymentMapper;
 import com.example.payments.domain.usecase.CreatePaymentUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -11,9 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/payments")
+@RestController
+@RequestMapping("/payments")
 @RequiredArgsConstructor
 @Validated
 @Slf4j
@@ -24,8 +27,8 @@ public class PaymentRestController {
 
     @PostMapping
     public ResponseEntity<PaymentDto> createPayment(@Valid @RequestBody PaymentDto request) {
-        return ResponseEntity.ok(new PaymentDto(createPaymentUseCase.apply(map.mapToPaymentBean(request))));
+        return ResponseEntity.ok(new PaymentDto(createPaymentUseCase.apply(map.mapPaymentToBean(request))));
     }
-
-
 }
+
+

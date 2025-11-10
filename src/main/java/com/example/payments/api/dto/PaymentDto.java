@@ -1,4 +1,4 @@
-package com.example.payments.api.Dto;
+package com.example.payments.api.dto;
 
 import com.example.payments.domain.entity.Payment;
 import com.example.payments.domain.enums.PaymentMethod;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public record PaymentDto(
         Long id,
         String requestId,
-        String origin,
+        Long origin,
         Long destinationId,
         PaymentMethod paymentMethod,
         LocalDateTime createDate,
@@ -19,7 +19,7 @@ public record PaymentDto(
         PaymentStatusEnum status
         ) implements Payment
 {
-    public PaymentDto(Long id, String requestId, String origin, Long destinationId, PaymentMethod paymentMethod, LocalDateTime createDate, LocalDateTime dateValue, BigDecimal amount, PaymentStatusEnum status) {
+    public PaymentDto(Long id, String requestId, Long origin, Long destinationId, PaymentMethod paymentMethod, LocalDateTime createDate, LocalDateTime dateValue, BigDecimal amount, PaymentStatusEnum status) {
         this.id = id;
         this.requestId = requestId;
         this.origin = origin;
@@ -32,7 +32,7 @@ public record PaymentDto(
     }
 
     public PaymentDto(Payment p) {
-        this(p.getId(),p.getRequestId(),p.getOrigin(),p.getDestinationId(),p.getPaymentMethod(),p.getCreateDate(),p.getDateValue(),p.getAmount(),p.getPaymentStatusEnum());
+        this(p.getId(),p.getRequestId(),p.getOrigin(),p.getDestinationId(),p.getPaymentMethod(),p.getCreateDate(),p.getDateValue(),p.getAmount(),p.getStatus());
     }
 
     @Override
@@ -46,7 +46,7 @@ public record PaymentDto(
     }
 
     @Override
-    public String getOrigin() {
+    public Long getOrigin() {
         return origin;
     }
 
@@ -76,7 +76,7 @@ public record PaymentDto(
     }
 
     @Override
-    public PaymentStatusEnum getPaymentStatusEnum() {
+    public PaymentStatusEnum getStatus() {
         return status;
     }
 

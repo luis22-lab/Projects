@@ -1,7 +1,6 @@
-package com.example.payments.application.payment;
+package com.example.payments.application.usecase;
 
 import com.example.payments.domain.entity.PaymentRequest;
-import com.example.payments.domain.repository.PaymentRequestRepository;
 import com.example.payments.domain.usecase.CreatePaymentRequestUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;

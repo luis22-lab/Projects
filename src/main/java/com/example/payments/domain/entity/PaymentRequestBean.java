@@ -12,11 +12,11 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @Builder(toBuilder = true)
-@NoArgsConstructor(force = true)
+
 public class PaymentRequestBean implements PaymentRequest {
 
     private  final Long id;
-    private  final String requestId;
+    private  final String idempotencyKey;
     private  final List<PaymentRequestDetail>paymentRequestDetails;
     private  final LocalDateTime requestDate;
     private  final PaymentStatusEnum status;

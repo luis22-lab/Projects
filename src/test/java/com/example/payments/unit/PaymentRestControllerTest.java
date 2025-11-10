@@ -1,9 +1,10 @@
-package com.example.payments.api;
+package com.example.payments.unit;
 
-import com.example.payments.api.Dto.PaymentDto;
+import com.example.payments.api.PaymentRestController;
+import com.example.payments.api.dto.PaymentDto;
 import com.example.payments.domain.entity.PaymentBean;
 import com.example.payments.domain.enums.PaymentStatusEnum;
-import com.example.payments.domain.mapper.PaymentMapper;
+import com.example.payments.application.mapper.PaymentMapper;
 import com.example.payments.domain.usecase.CreatePaymentUseCase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,10 +35,10 @@ public class PaymentRestControllerTest {
     @Test
     void testCreatePayment() {
 
-        final var bean = PaymentBean.builder().id(2L).paymentStatusEnum(PaymentStatusEnum.DONE).amount(BigDecimal.valueOf(2000000)).build();
+        final var bean = PaymentBean.builder().id(2L).status(PaymentStatusEnum.DONE).amount(BigDecimal.valueOf(2000000)).build();
         final var expected = new PaymentDto(bean);
 
-        Mockito.when(map.mapToPaymentBean(expected)).thenReturn(bean);
+        Mockito.when(map.mapPaymentToBean(expected)).thenReturn(bean);
         Mockito.when(useCase.apply(bean)).thenReturn(bean);
 
         final var actual = controller.createPayment(expected);
