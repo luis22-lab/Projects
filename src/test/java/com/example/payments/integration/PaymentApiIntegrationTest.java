@@ -87,7 +87,6 @@ class PaymentApiIntegrationTest {
         final var dto = PaymentMapper.INSTANCE.mapPaymentToDto(payment);
 
         ResponseEntity<PaymentDto> response = restTemplate.postForEntity("/payments", dto, PaymentDto.class);
-        log.info("/*/**/*/*//*/*/*/**/*/*/*/*/*/*/*/*/*/*/*/*/"+response.getBody().toString());
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals("0000001", response.getBody().getRequestId());

@@ -5,6 +5,8 @@ import com.example.payments.infraestructure.repository.PaymentJpaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.jeasy.random.EasyRandom;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,11 @@ public class PaymentRestControllerIT {
     @Autowired
     private PaymentJpaRepository paymentJpaRepository;
 
+    @BeforeEach
+    void setup() {
+        paymentJpaRepository.deleteAll();
+    }
+
     @Test
     void testCreatePayment() throws Exception {
 
@@ -47,6 +54,11 @@ public class PaymentRestControllerIT {
                         .content(newPago));
 
         assert(paymentJpaRepository.findAll().size() == 1);
+    }
+
+    @AfterEach
+    void cleanup() {
+        paymentJpaRepository.deleteAll();
     }
 
 }
