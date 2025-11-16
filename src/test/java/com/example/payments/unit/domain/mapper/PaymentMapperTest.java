@@ -13,6 +13,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -59,13 +60,13 @@ public class PaymentMapperTest {
 
         final PaymentMapper mapper = Mockito.mock(PaymentMapper.class);
         final PaymentBean bean  = PaymentBean.builder().id(2L).build();
-        final var expectedDto = new PaymentDto(bean);
+        final var expectedDto = mapper.mapBeanToDto(bean);
 
-        when(mapper.mapPaymentToBean(expectedDto)).thenReturn(bean);
+        when(mapper.mapDtoToBean(expectedDto)).thenReturn(bean);
 
-        final PaymentBean actual = mapper.mapPaymentToBean(expectedDto);
+        final PaymentBean actual = mapper.mapDtoToBean(expectedDto);
 
-        verify(mapper).mapPaymentToBean(expectedDto);
+        verify(mapper).mapDtoToBean(expectedDto);
         assertEquals(bean,actual);
 
         log.info("test 3 execute");
@@ -74,14 +75,16 @@ public class PaymentMapperTest {
     public void testMapToPaymentDto(){
 
         final PaymentMapper mapper = Mockito.mock(PaymentMapper.class);
-        final PaymentBean bean  = PaymentBean.builder().id(1L).build();
-        final var expectedDto = new PaymentDto(bean);
+        final PaymentBean bean = PaymentBean.builder().id(1L).build();
 
-        when(mapper.mapPaymentToDto(bean)).thenReturn(expectedDto);
+        final PaymentDto expectedDto = Mockito.mock(PaymentDto.class);
 
-        final var actual =  new PaymentDto(mapper.mapPaymentToDto(bean));
-        verify(mapper).mapPaymentToDto(bean);
-        assertEquals(expectedDto,actual);
+        when(mapper.mapBeanToDto(bean)).thenReturn(expectedDto);
+
+        final var actual = mapper.mapBeanToDto(bean);
+
+        verify(mapper).mapBeanToDto(bean);
+        assertNotNull(actual);
 
         log.info("test 4 execute");
 

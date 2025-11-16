@@ -4,7 +4,6 @@ import com.example.payments.domain.enums.PaymentStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.List;
 public class PaymentRequestBean implements PaymentRequest {
 
     private  final Long id;
-    private  final String idempotencyKey;
+    private  final String requestId;
     private  final List<PaymentRequestDetail>paymentRequestDetails;
     private  final LocalDateTime requestDate;
     private  final PaymentStatusEnum status;

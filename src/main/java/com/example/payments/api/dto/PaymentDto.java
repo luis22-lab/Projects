@@ -31,10 +31,6 @@ public record PaymentDto(
         this.status = status;
     }
 
-    public PaymentDto(Payment p) {
-        this(p.getId(),p.getRequestId(),p.getOrigin(),p.getDestinationId(),p.getPaymentMethod(),p.getCreateDate(),p.getDateValue(),p.getAmount(),p.getStatus());
-    }
-
     @Override
     public Long getId() {
         return id;
@@ -79,5 +75,4 @@ public record PaymentDto(
     public PaymentStatusEnum getStatus() {
         return status;
     }
-
 }

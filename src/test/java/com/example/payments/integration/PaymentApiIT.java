@@ -1,13 +1,13 @@
 package com.example.payments.integration;
 
 import com.example.payments.api.dto.PaymentDto;
-import com.example.payments.application.mapper.AccountMapper;
 import com.example.payments.application.mapper.PaymentMapper;
 import com.example.payments.domain.entity.AccountBean;
 import com.example.payments.domain.entity.PaymentBean;
 import com.example.payments.domain.enums.AccountStatusEnum;
 import com.example.payments.domain.enums.PaymentMethod;
 import com.example.payments.domain.enums.PaymentStatusEnum;
+import com.example.payments.infraestructure.mapper.AccountEntityMapper;
 import com.example.payments.infraestructure.repository.AccountJpaRepository;
 import com.example.payments.infraestructure.repository.PaymentJpaRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -18,10 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -33,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @ActiveProfiles("test")
 @Slf4j
-class PaymentApiIntegrationTest {
+class PaymentApiIT {
 
     @Autowired
     private AccountJpaRepository accountRepository;
@@ -51,7 +49,7 @@ class PaymentApiIntegrationTest {
     }
 
     @Test
-    void testGetPaymentByRequestId() {
+    void tesPostPayment() {
 
 
         final var accountOrigen = AccountBean.builder()
@@ -81,16 +79,16 @@ class PaymentApiIntegrationTest {
                 .destinationId(123456L)
                 .origin(12345L).build();
 
-        accountRepository.save(AccountMapper.INSTANCE.toEntity(accountOrigen));
-        accountRepository.save(AccountMapper.INSTANCE.toEntity(accountDestino));
+        accountRepository.save(AccountEntityMapper.INSTANCE.toEntity(accountOrigen));
+        accountRepository.save(AccountEntityMapper.INSTANCE.toEntity(accountDestino));
 
-        final var dto = PaymentMapper.INSTANCE.mapPaymentToDto(payment);
+        final var dto = PaymentMapper.INSTANCE.mapBeanToDto(payment);
 
-        ResponseEntity<PaymentDto> response = restTemplate.postForEntity("/payments", dto, PaymentDto.class);
+        final var response = restTemplate.postForEntity("/payments", dto, PaymentDto.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
-        assertEquals("0000001", response.getBody().getRequestId());
-        assertEquals(BigDecimal.valueOf(100.0), response.getBody().getAmount());
+        assertEquals("0000001", response.getBody().requestId());
+        assertEquals(BigDecimal.valueOf(100.0), response.getBody().amount());
 
         final var saved = paymentRepository.findByRequestId("0000001").orElseThrow();
         assertEquals(PaymentStatusEnum.DONE, saved.getStatus());

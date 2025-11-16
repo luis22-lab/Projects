@@ -15,8 +15,8 @@ public class PaymentRequestEntity {
     @Column(name = "id", nullable= false)
     private Long id;
 
-    @Column(name = "idempotencyKey",unique= true, nullable = false, updatable = false)
-    private String idempotencyKey;
+    @Column(name = "requestId",unique= true, nullable = false, updatable = false)
+    private String requestId;
 
     @Column(name = "requestDate",nullable = false, updatable = false)
     LocalDateTime requestDate;

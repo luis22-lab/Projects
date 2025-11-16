@@ -5,9 +5,12 @@ import com.example.payments.domain.usecase.FindPaymentRequestUseCase;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FindPaymentRequestImpl implements FindPaymentRequestUseCase {
+public class FindPaymentRequestUseCaseImpl implements FindPaymentRequestUseCase {
+
+
     @Override
     public PaymentRequest apply(String aLong) {
+
         return null;
     }
 }

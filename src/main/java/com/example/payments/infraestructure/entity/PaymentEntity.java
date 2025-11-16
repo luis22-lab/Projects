@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity(name = "payment")
 @Data
-public class PaymentEntity {
+public class PaymentEntity  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +26,7 @@ public class PaymentEntity {
     @Column(name = "destinationId",nullable = false, updatable = false)
     String destinationId;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "paymentMethod",nullable = false, updatable = false)
     private PaymentMethod paymentMethod;
 

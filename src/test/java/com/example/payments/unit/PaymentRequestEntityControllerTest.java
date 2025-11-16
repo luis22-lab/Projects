@@ -34,7 +34,7 @@ public class PaymentRequestEntityControllerTest {
     @Test
     void testPostPaymentRequest() {
 
-        final var bean = PaymentRequestBean.builder().id(1L).idempotencyKey("01A").status(PaymentStatusEnum.DONE).build();
+        final var bean = PaymentRequestBean.builder().id(1L).requestId("01A").status(PaymentStatusEnum.DONE).build();
         final var request = new PaymentRequestDto(bean);
 
         Mockito.when(map.mapPaymentRequestToBean(request)).thenReturn(bean);
@@ -52,7 +52,7 @@ public class PaymentRequestEntityControllerTest {
     void testGetPaymentRequest() {
 
         final var idRequest= "01B";
-        final var bean = PaymentRequestBean.builder().id(2L).idempotencyKey("01B").status(PaymentStatusEnum.DONE).build();
+        final var bean = PaymentRequestBean.builder().id(2L).requestId("01B").status(PaymentStatusEnum.DONE).build();
         final var request = new PaymentRequestDto(bean);
 
         Mockito.when(findUseCase.apply(idRequest)).thenReturn(bean);

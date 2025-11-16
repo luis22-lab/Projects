@@ -1,7 +1,6 @@
 package com.example.payments.api;
 
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import com.example.payments.api.dto.PaymentDto;
 import com.example.payments.application.mapper.PaymentMapper;
 import com.example.payments.domain.usecase.CreatePaymentUseCase;
@@ -27,7 +26,7 @@ public class PaymentRestController {
 
     @PostMapping
     public ResponseEntity<PaymentDto> createPayment(@Valid @RequestBody PaymentDto request) {
-        return ResponseEntity.ok(new PaymentDto(createPaymentUseCase.apply(map.mapPaymentToBean(request))));
+        return ResponseEntity.ok(map.mapBeanToDto(createPaymentUseCase.apply(map.mapDtoToBean(request))));
     }
 }
 
