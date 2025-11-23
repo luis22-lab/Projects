@@ -1,7 +1,6 @@
-package com.example.payments.application.predicate;
+package com.example.payments.application.predicate.requestpayment;
 
 import com.example.payments.domain.entity.Payment;
-import com.example.payments.domain.enums.AccountStatusEnum;
 import com.example.payments.domain.predicate.ValidateRequestPayment;
 import com.example.payments.domain.repository.AccountRepository;
 import lombok.Data;
@@ -9,22 +8,22 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class ValidateDestinationStatusImpl implements ValidateRequestPayment {
+public class ValidatePaymentMethodImpl implements ValidateRequestPayment {
 
     private final AccountRepository accountRepository;
 
+    @Override
     public boolean test(Payment payment) {
-        return validateDestinationStatus(payment);
+       return validateAccountPaymentMethod(payment);
     }
 
-    private Boolean validateDestinationStatus(Payment payment) {
+    private Boolean validateAccountPaymentMethod(Payment payment) {
         return accountRepository.findByIdAccount(payment.getDestinationId())
-                .map(account -> account.getAccountStatus().equals(AccountStatusEnum.ACTIVATED))
+                .map(account -> account.getPaymentMethod().equals(payment.getPaymentMethod()))
                 .orElse(false);
     }
-
     @Override
     public String getErrorMessage() {
-        return "la cuenta destino está bloqueada";
+        return "Método de pago no admitido";
     }
 }

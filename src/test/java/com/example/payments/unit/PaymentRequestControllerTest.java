@@ -20,7 +20,7 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 
-public class PaymentRequestEntityControllerTest {
+public class PaymentRequestControllerTest {
 
 
     @InjectMocks
@@ -38,7 +38,7 @@ public class PaymentRequestEntityControllerTest {
         final var request = new PaymentRequestDto(bean);
 
         Mockito.when(map.mapPaymentRequestToBean(request)).thenReturn(bean);
-        Mockito.when(createUseCase.apply(bean)).thenReturn(bean);
+        Mockito.when(createUseCase.apply(Mockito.any(PaymentRequestBean.class))).thenReturn(bean);
 
         final var actual = controller.postPaymentRequest(request);
 

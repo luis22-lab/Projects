@@ -8,9 +8,10 @@ import java.time.LocalDateTime;
 
 public interface PaymentRequestDetail {
 
-        Long getIdempotencyKey();
-        String getOrigin();
-        String getDestinationId();
+        Long getId();
+        String getRequestId();
+        Long getOrigin();
+        Long getDestinationId();
         PaymentMethod getPaymentMethod();
         LocalDateTime getCreateDate();
         LocalDateTime getDateValue();

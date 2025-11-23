@@ -3,22 +3,29 @@ package com.example.payments.api.dto;
 import com.example.payments.domain.entity.PaymentRequest;
 import com.example.payments.domain.entity.PaymentRequestDetail;
 import com.example.payments.domain.enums.PaymentStatusEnum;
+import com.fasterxml.jackson.annotation.JsonCreator;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record PaymentRequestDto (Long id,String requestId,List <PaymentRequestDetail> paymentRequestDetails,LocalDateTime requestDate,PaymentStatusEnum status)implements PaymentRequest{
 
-    public PaymentRequestDto(Long id, String requestId, List<PaymentRequestDetail> paymentRequestDetails, LocalDateTime requestDate, PaymentStatusEnum status) {
+public record PaymentRequestDto (Long id, String requestId, Long idOrigin, List <PaymentRequestDetailDto> paymentRequestDetails, LocalDateTime requestDate, PaymentStatusEnum status)implements PaymentRequest{
+
+    @JsonCreator
+    public PaymentRequestDto(Long id,String requestId,Long idOrigin,List<PaymentRequestDetailDto> paymentRequestDetails,LocalDateTime requestDate,PaymentStatusEnum status) {
         this.id = id;
         this.requestId = requestId;
-        this.paymentRequestDetails = paymentRequestDetails;
+        this.paymentRequestDetails =paymentRequestDetails;
         this.requestDate = requestDate;
+        this.idOrigin = idOrigin;
         this.status = status;
     }
 
     public PaymentRequestDto(PaymentRequest  paymentRequest) {
-        this(paymentRequest.getId(),paymentRequest.getRequestId(),paymentRequest.getPaymentRequestDetails(),paymentRequest.getRequestDate(),paymentRequest.getStatus());
+        this(paymentRequest.getId(),paymentRequest.getRequestId(),paymentRequest.getIdOrigin(),
+                paymentRequest.getPaymentRequestDetails()
+                    .stream()
+                    .map(PaymentRequestDetailDto::new).toList(),paymentRequest.getRequestDate(),paymentRequest.getStatus());
     }
 
     @Override
@@ -32,8 +39,13 @@ public record PaymentRequestDto (Long id,String requestId,List <PaymentRequestDe
     }
 
     @Override
+    public Long getIdOrigin() {
+        return idOrigin;
+    }
+
+    @Override
     public List<PaymentRequestDetail> getPaymentRequestDetails() {
-        return paymentRequestDetails;
+       return List.copyOf(paymentRequestDetails);
     }
 
     @Override

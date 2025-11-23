@@ -1,15 +1,15 @@
 package com.example.payments.steps;
 
-import com.example.payments.application.mapper.PaymentMapper;
 import com.example.payments.domain.entity.PaymentBean;
 import com.example.payments.domain.enums.PaymentMethod;
 import com.example.payments.domain.enums.PaymentStatusEnum;
 import com.example.payments.infraestructure.entity.PaymentEntity;
 import com.example.payments.infraestructure.mapper.PaymentEntityMapper;
 import com.example.payments.infraestructure.repository.PaymentJpaRepository;
-import io.cucumber.java.en.*;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import lombok.extern.slf4j.Slf4j;
-import org.jeasy.random.EasyRandom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -39,7 +39,7 @@ public class PaymentRepositorySteps {
                  payment = PaymentBean.builder()
                 .destinationId(1L)
                 .requestId("56789")
-                .paymentMethod(PaymentMethod.CHEQUE)
+                .paymentMethod(PaymentMethod.CHECK)
                 .origin(2L)
                 .dateValue(LocalDateTime.now())
                 .createDate(LocalDateTime.now())
@@ -54,7 +54,7 @@ public class PaymentRepositorySteps {
         Optional<PaymentEntity> result = paymentJpaRepository.findByRequestId("56789");
         assertThat(result).isPresent();
         assertThat(result.get().getAmount()).isEqualTo(payment.getAmount());
-        assertThat(result.get().getPaymentMethod()).isEqualTo(PaymentMethod.CHEQUE);
+        assertThat(result.get().getPaymentMethod()).isEqualTo(PaymentMethod.CHECK);
     }
 
 

@@ -15,6 +15,7 @@ import java.util.List;
 public class PaymentRequestBean implements PaymentRequest {
 
     private  final Long id;
+    private  final Long idOrigin;
     private  final String requestId;
     private  final List<PaymentRequestDetail>paymentRequestDetails;
     private  final LocalDateTime requestDate;

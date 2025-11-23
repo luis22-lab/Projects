@@ -1,5 +1,8 @@
 package com.example.payments.domain.enums;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@JsonFormat(shape = JsonFormat.Shape.STRING)
 public enum PaymentMethod {
-    TRANSFERENCIA ,CHEQUE,CRYPTOMONEDA;
+    TRANSFER ,CHECK,CRYPTOCURRENCY
 }

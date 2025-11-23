@@ -1,8 +1,8 @@
 package com.example.payments.api;
 
 import com.example.payments.api.dto.PaymentRequestDto;
-import com.example.payments.application.mapper.PaymentMapper;
 import com.example.payments.application.mapper.PaymentRequestMapper;
+import com.example.payments.domain.entity.PaymentRequestBean;
 import com.example.payments.domain.usecase.CreatePaymentRequestUseCase;
 import com.example.payments.domain.usecase.FindPaymentRequestUseCase;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class PaymentRequestRestController {
 
     @PostMapping
     public ResponseEntity<PaymentRequestDto> postPaymentRequest(@RequestBody PaymentRequestDto paymentRequestDto) {
-            return ResponseEntity.ok(new PaymentRequestDto(createPaymentRequestUseCase.apply(map.mapPaymentRequestToBean(paymentRequestDto))));
+            return ResponseEntity.ok(new PaymentRequestDto(map.mapPaymentRequestToDto((PaymentRequestBean) createPaymentRequestUseCase.apply(map.mapPaymentRequestToBean(paymentRequestDto)))));
     }
 
     @GetMapping("/{requestId}")

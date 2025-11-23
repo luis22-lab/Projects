@@ -1,4 +1,4 @@
-package com.example.payments.application.predicate;
+package com.example.payments.application.predicate.requestpayment;
 
 import com.example.payments.domain.entity.Payment;
 import com.example.payments.domain.predicate.ValidateRequestPayment;

@@ -1,8 +1,6 @@
-package com.example.payments.application.predicate;
+package com.example.payments.application.predicate.requestpaymentmultiple;
 
-import com.example.payments.domain.entity.Account;
 import com.example.payments.domain.entity.Payment;
-import com.example.payments.domain.enums.AccountStatusEnum;
 import com.example.payments.domain.predicate.ValidateRequestPayment;
 import com.example.payments.domain.repository.AccountRepository;
 import lombok.AllArgsConstructor;
@@ -10,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class ValidateAccountOriginAuthorizedImpl implements ValidateRequestPayment {
+public class ValidateAccountOriginPaymentRequestAuthorizedImpl implements ValidateRequestPayment {
 
 
     private final AccountRepository accountRepository;

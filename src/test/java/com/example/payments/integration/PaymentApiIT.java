@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
@@ -27,8 +26,7 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)/*Levanta un servidor embebido llamadas hhtp(restTemplate..)*/
 @ActiveProfiles("test")
 @Slf4j
 class PaymentApiIT {
@@ -55,24 +53,24 @@ class PaymentApiIT {
         final var accountOrigen = AccountBean.builder()
                 .idAccount(12345L)
                 .name("CAIXA")
-                .paymentMethod(PaymentMethod.CHEQUE)
+                .paymentMethod(PaymentMethod.CHECK)
                 .initialBalance(BigDecimal.valueOf(1))
-                .accountStatus(AccountStatusEnum.ACTIVATED)
+                .accountStatus(AccountStatusEnum.ACTIVE)
                 .authorized(true)
                 .build();
 
         final var accountDestino = AccountBean.builder()
                 .idAccount(123456L)
                 .name("ING")
-                .paymentMethod(PaymentMethod.CHEQUE)
+                .paymentMethod(PaymentMethod.CHECK)
                 .initialBalance(BigDecimal.valueOf(1))
-                .accountStatus(AccountStatusEnum.ACTIVATED)
+                .accountStatus(AccountStatusEnum.ACTIVE)
                 .authorized(true)
                 .build();
         final var payment = PaymentBean.builder()
                 .requestId("0000001")
                 .amount(BigDecimal.valueOf(100.0))
-                .paymentMethod(PaymentMethod.CHEQUE)
+                .paymentMethod(PaymentMethod.CHECK)
                 .status(PaymentStatusEnum.DONE)
                 .createDate(LocalDateTime.now())
                 .dateValue(LocalDateTime.now())

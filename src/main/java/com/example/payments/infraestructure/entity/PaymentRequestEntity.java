@@ -6,7 +6,8 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Entity(name = "paymentRequest")
+@Entity
+@Table(name = "PAYMENT_REQUEST")
 @Data
 public class PaymentRequestEntity {
 
@@ -17,6 +18,9 @@ public class PaymentRequestEntity {
 
     @Column(name = "requestId",unique= true, nullable = false, updatable = false)
     private String requestId;
+
+    @Column(name = "idOrigin", nullable = false,updatable = false)
+    private Long idOrigin;
 
     @Column(name = "requestDate",nullable = false, updatable = false)
     LocalDateTime requestDate;

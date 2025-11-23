@@ -2,7 +2,6 @@ package com.example.payments.infraestructure.entity;
 
 import com.example.payments.domain.enums.AccountStatusEnum;
 import com.example.payments.domain.enums.PaymentMethod;
-import com.example.payments.domain.enums.PaymentStatusEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -27,12 +26,14 @@ public class AccountEntity {
     @Column(name = "initialBalance",nullable = false, updatable = false)
     BigDecimal initialBalance;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "paymentMethod",nullable = false, updatable = false)
     private PaymentMethod paymentMethod;
 
     @Column(name = "authorized",nullable = false, updatable = false)
     private boolean authorized;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "accountStatus",nullable = false, updatable = false)
     AccountStatusEnum accountStatus;
 

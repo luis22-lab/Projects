@@ -11,6 +11,6 @@ public class CreatePaymentNotificationListener {
 
     @EventListener
     public void handleCreatePaymentEvent(CreatePaymentEvent event) {
-        log.info("-*-*-*-*-*-*-*-*-*-*-*-*--*-*-**-*-*-*-*-*-*--*------Event: CreatePaymentEvent");
+        log.info("*_*_*_*_*_*_*_*_*_* --> Internal Event: CreatePaymentEvent");
     }
 }

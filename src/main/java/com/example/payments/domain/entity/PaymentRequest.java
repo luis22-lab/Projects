@@ -9,8 +9,8 @@ public interface PaymentRequest {
 
     Long getId();
     String getRequestId();
+    Long getIdOrigin();
     List<PaymentRequestDetail> getPaymentRequestDetails();
     LocalDateTime getRequestDate();
     PaymentStatusEnum getStatus();
-
 }
