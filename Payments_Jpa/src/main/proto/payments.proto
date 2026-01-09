@@ -1,0 +1,48 @@
+
+syntax = "proto3";
+
+package com.example.payments;
+
+option java_multiple_files = true;
+option java_outer_classname = "paymentsProto";
+
+service PaymentService{
+  rpc getPayment(GetPaymentRequest) returns (GetPaymentResponse);
+  rpc postPayment(PostPaymentRequest) returns (PostPaymentResponse);
+}
+
+
+message PaymentGrpc{
+  int64 id = 1;
+  string requestId = 2;
+  int64 origin = 3;
+  int64 destinationId = 4;
+  string paymentMethod = 5;
+  string createDate = 6;
+  string dateValue = 7;
+  string amount = 8;
+  string status = 9;
+}
+
+message GetPaymentRequest{
+  int64 id = 1 ;
+}
+message GetPaymentResponse{
+  PaymentGrpc payment = 1;
+}
+
+message PostPaymentRequest{
+  string requestId = 1;
+  int64 origin = 2;
+  int64 destinationId = 3;
+  string paymentMethod = 4;
+  string createDate = 5;
+  string dateValue = 6;
+  string amount = 7;
+  string status = 8;
+}
+
+message PostPaymentResponse{
+  PaymentGrpc payment = 1 ;
+}
+

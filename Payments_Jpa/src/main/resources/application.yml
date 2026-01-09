@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    # Base de datos en memoria
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true           # Habilita la consola web
+      path: /h2-console       # URL para acceder a la consola
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update        # update, create, validate según necesidad
+    show-sql: true
+  sql:
+    init:
+      mode: always      # fuerza la ejecución de los scripts
+      data-locations: classpath:db/init.sql
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: false
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+      group-id: payment_group
+      auto-offset-reset: earliest
+

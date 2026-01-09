@@ -1,0 +1,30 @@
+
+syntax = "proto3";
+package com.example.grpc;
+
+option java_multiple_files = true;
+option java_outer_classname = "PaymentsProto";
+
+
+
+service PaymentService{
+  rpc make(PaymentRequest) returns (PaymentResponse);
+}
+
+message PaymentRequest{
+  string id = 1;
+  string requestId = 2;
+  int64 origin = 3;
+  int64 destinationId= 4;
+  string paymentMethod = 5;
+  string createDate = 6;
+  string dateValue = 7;
+  int64 amount = 8;
+  string status =9;
+}
+
+message PaymentResponse{
+  bool success = 1;
+  string message = 2;
+}
+
